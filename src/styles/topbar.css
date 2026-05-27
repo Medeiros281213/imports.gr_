@@ -1,0 +1,48 @@
+/* ============================================
+   IMPORTS GR - Apple-style Promo Topbar
+   Thin strip below the fixed navigation
+   ============================================ */
+
+.apple-topbar {
+  position: relative;
+  margin-top: 48px;
+  background: var(--color-card-bg);
+  text-align: center;
+  padding: 10px 16px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.4;
+}
+
+.apple-topbar p {
+  margin: 0;
+}
+
+.apple-topbar a {
+  color: #0071E3;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.apple-topbar a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .apple-topbar {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .apple-topbar {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}

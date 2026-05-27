@@ -1,0 +1,41 @@
+.as-section {
+  padding: 40px 0;
+  overflow: hidden;
+}
+
+.as-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.as-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.as-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 10px 24px 40px;
+  margin: 0 auto;
+  max-width: 1248px;
+  scrollbar-width: none;
+}
+
+.as-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.as-card-snap {
+  flex-shrink: 0;
+}

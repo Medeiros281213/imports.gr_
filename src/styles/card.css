@@ -1,0 +1,419 @@
+/* ============================================
+   IMPORTS GR - Product Card Styles (Apple Style)
+   Clean, minimal product cards
+   ============================================ */
+
+/* --- Products Section --- */
+.products-section {
+  padding: 60px 0;
+  background: var(--color-background, #FFFFFF);
+}
+
+.products-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Products Header --- */
+.products-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-label {
+  display: inline-block;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary, #0071E3);
+  margin-bottom: 8px;
+}
+
+.products-header h2 {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-text-primary, #1D1D1F);
+  line-height: 1.1;
+  letter-spacing: -0.003em;
+  margin: 0;
+}
+
+.products-header p {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 17px;
+  color: var(--color-text-secondary, #6E6E73);
+  margin-top: 8px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.47;
+}
+
+/* --- Products Grid --- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* --- Apple Card --- */
+.apple-card {
+  background: var(--color-card-bg, #F5F5F7);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border: none;
+  position: relative;
+}
+
+.apple-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-card-hover, 0 8px 30px rgba(0, 0, 0, 0.08));
+}
+
+/* --- Card Image --- */
+.apple-card-image {
+  position: relative;
+  padding: 32px 24px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  background: var(--color-card-bg, #F5F5F7);
+}
+
+.apple-card-image img {
+  max-height: 200px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.apple-card:hover .apple-card-image img {
+  transform: scale(1.05);
+}
+
+/* --- Card Badge --- */
+.apple-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  z-index: 2;
+}
+
+.apple-card-badge.badge-destaque {
+  background: #BF4800;
+  color: #FFFFFF;
+}
+
+.apple-card-badge.badge-novo {
+  background: #0071E3;
+  color: #FFFFFF;
+}
+
+.apple-card-badge.badge-frete {
+  background: #1D1D1F;
+  color: #FFFFFF;
+}
+
+.apple-card-badge.badge-promo {
+  background: #AF1E2D;
+  color: #FFFFFF;
+}
+
+/* --- Card Info --- */
+.apple-card-info {
+  padding: 0 20px 24px;
+}
+
+/* --- Card Category --- */
+.apple-card-category {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-secondary, #6E6E73);
+  font-weight: 500;
+  display: block;
+}
+
+/* --- Card Name --- */
+.apple-card-name {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary, #1D1D1F);
+  margin: 4px 0 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Card Brand --- */
+.apple-card-brand {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  color: var(--color-text-secondary, #6E6E73);
+  margin-top: 2px;
+}
+
+/* --- Card Pricing --- */
+.apple-card-pricing {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.apple-card-price-old {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  color: var(--color-text-secondary, #6E6E73);
+  text-decoration: line-through;
+}
+
+.apple-card-price {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary, #1D1D1F);
+}
+
+/* --- Card Installments --- */
+.apple-card-installments {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  color: var(--color-text-secondary, #6E6E73);
+  margin-top: 4px;
+}
+
+.apple-card-installments strong {
+  color: var(--color-text-primary, #1D1D1F);
+  font-weight: 600;
+}
+
+/* --- Card Stock --- */
+.apple-card-stock {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  color: var(--color-text-secondary, #6E6E73);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34C759;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.out-of-stock {
+  color: #FF3B30;
+  font-weight: 600;
+}
+
+/* --- Card Actions --- */
+.apple-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.apple-card-btn-whatsapp {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  background: #25D366;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.apple-card-btn-whatsapp:hover {
+  background: #1EBE5D;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.apple-card-btn-instagram {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  background-size: 200% 200%;
+}
+
+.apple-card-btn-instagram:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 39, 67, 0.3);
+  background-position: right center;
+}
+
+/* --- Empty State --- */
+.products-empty {
+  text-align: center;
+  padding: 60px 24px;
+  grid-column: 1 / -1;
+  color: var(--color-text-secondary, #6E6E73);
+}
+
+.products-empty h3 {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--color-text-primary, #1D1D1F);
+  margin-bottom: 8px;
+}
+
+.products-empty p {
+  font-size: 15px;
+  color: var(--color-text-secondary, #6E6E73);
+}
+
+/* --- Scroll Animation --- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Responsive --- */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .products-header h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-section {
+    padding: 48px 0;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .products-header {
+    margin-bottom: 32px;
+  }
+
+  .products-header h2 {
+    font-size: 28px;
+  }
+
+  .apple-card-image {
+    padding: 24px 16px 12px;
+    min-height: 180px;
+  }
+
+  .apple-card-image img {
+    max-height: 160px;
+  }
+
+  .apple-card-info {
+    padding: 0 16px 20px;
+  }
+
+  .apple-card-name {
+    font-size: 15px;
+  }
+
+  .apple-card-price {
+    font-size: 15px;
+  }
+
+  .apple-card-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .products-section {
+    padding: 40px 0;
+  }
+
+  .products-container {
+    padding: 0 16px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .products-header h2 {
+    font-size: 24px;
+  }
+
+  .products-header p {
+    font-size: 15px;
+  }
+
+  .apple-card:hover {
+    transform: scale(1.01);
+  }
+
+  .apple-card-actions {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,149 @@
+/* ============================================
+   IMPORTS GR - Instagram Feed (Apple-Style Grid)
+   ============================================ */
+
+.instagram-section {
+  padding: 100px 0;
+  background: var(--color-background, #FFFFFF);
+}
+
+.instagram-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Header --- */
+.instagram-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.instagram-heading {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #1D1D1F);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.instagram-subheading {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.15rem;
+  color: var(--color-text-secondary, #6E6E73);
+  line-height: 1.5;
+}
+
+/* --- Grid --- */
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.instagram-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  display: block;
+}
+
+.instagram-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.instagram-item:hover img {
+  transform: scale(1.04);
+}
+
+/* --- Overlay --- */
+.instagram-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.instagram-item:hover .instagram-overlay {
+  opacity: 1;
+}
+
+.instagram-overlay svg {
+  color: #FFFFFF;
+  font-size: 1.8rem;
+}
+
+/* --- CTA --- */
+.instagram-cta-wrapper {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.instagram-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-primary, #0071E3);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.instagram-cta:hover {
+  text-decoration: underline;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .instagram-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .instagram-section {
+    padding: 80px 0;
+  }
+
+  .instagram-heading {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .instagram-section {
+    padding: 60px 0;
+  }
+
+  .instagram-container {
+    padding: 0 16px;
+  }
+
+  .instagram-heading {
+    font-size: 1.8rem;
+  }
+
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .instagram-item {
+    border-radius: 12px;
+  }
+}

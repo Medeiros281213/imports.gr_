@@ -1,0 +1,280 @@
+/* ============================================
+   IMPORTS GR - Apple-style Navigation
+   Slim dark translucent global nav bar
+   ============================================ */
+
+/* --- Main Nav Bar --- */
+.apple-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background: rgba(29, 29, 31, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: var(--z-navbar, 1000);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.apple-nav.scrolled {
+  background: rgba(29, 29, 31, 0.88);
+}
+
+/* --- Nav Container --- */
+.apple-nav-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+/* --- Logo --- */
+.apple-nav-logo {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #F5F5F7;
+  letter-spacing: 1px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+.apple-nav-logo:hover {
+  opacity: 0.8;
+}
+
+.apple-nav-logo span {
+  color: #0071E3;
+}
+
+/* --- Desktop Menu --- */
+.apple-nav-menu {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.apple-nav-menu li {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  color: #F5F5F7;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.apple-nav-menu li:hover {
+  opacity: 1;
+}
+
+/* --- Right Side Actions --- */
+.apple-nav-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.apple-nav-btn {
+  color: #F5F5F7;
+  opacity: 0.8;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.apple-nav-btn:hover {
+  opacity: 1;
+}
+
+.apple-nav-btn.active {
+  opacity: 1;
+}
+
+/* --- Hamburger (mobile only) --- */
+.apple-nav-hamburger {
+  color: #F5F5F7;
+  opacity: 0.8;
+  font-size: 1.15rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  padding: 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.apple-nav-hamburger:hover {
+  opacity: 1;
+}
+
+.apple-nav-hamburger.active {
+  opacity: 1;
+}
+
+/* --- Search Bar Dropdown --- */
+.apple-nav-search {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  background: rgba(29, 29, 31, 0.95);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid rgba(66, 66, 69, 0.6);
+  animation: fadeIn 0.2s ease;
+  z-index: 999;
+}
+
+.apple-nav-search-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.apple-nav-search-inner .search-icon {
+  color: #A1A1A6;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.apple-nav-search-input {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  color: #F5F5F7;
+  caret-color: #0071E3;
+}
+
+.apple-nav-search-input::placeholder {
+  color: #6E6E73;
+}
+
+/* --- Mobile Menu Overlay --- */
+.apple-nav-mobile {
+  position: fixed;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 48px);
+  height: calc(100dvh - 48px);
+  background: rgba(29, 29, 31, 0.97);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.apple-nav-mobile.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.apple-nav-mobile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 680px;
+}
+
+.apple-nav-mobile ul li {
+  border-bottom: 1px solid rgba(66, 66, 69, 0.4);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.apple-nav-mobile.active ul li {
+  animation: fadeInUp 0.35s ease forwards;
+}
+
+.apple-nav-mobile.active ul li:nth-child(1) { animation-delay: 0.05s; }
+.apple-nav-mobile.active ul li:nth-child(2) { animation-delay: 0.1s; }
+.apple-nav-mobile.active ul li:nth-child(3) { animation-delay: 0.15s; }
+.apple-nav-mobile.active ul li:nth-child(4) { animation-delay: 0.2s; }
+.apple-nav-mobile.active ul li:nth-child(5) { animation-delay: 0.25s; }
+
+.apple-nav-mobile ul li {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #F5F5F7;
+  padding: 18px 22px;
+  transition: background 0.2s ease;
+}
+
+.apple-nav-mobile ul li:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.apple-nav-mobile ul li:last-child {
+  border-bottom: none;
+}
+
+/* --- Responsive: Tablet & Mobile --- */
+@media (max-width: 768px) {
+  .apple-nav-menu {
+    display: none;
+  }
+
+  .apple-nav-hamburger {
+    display: flex;
+  }
+
+  .apple-nav-container {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .apple-nav-logo {
+    font-size: 1rem;
+  }
+
+  .apple-nav-actions {
+    gap: 12px;
+  }
+
+  .apple-nav-btn {
+    font-size: 0.95rem;
+  }
+
+  .apple-nav-mobile ul li {
+    font-size: 1rem;
+    padding: 16px 18px;
+  }
+}

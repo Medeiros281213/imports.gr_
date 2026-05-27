@@ -1,0 +1,195 @@
+/* ============================================
+   IMPORTS GR - Welcome Popup (Apple-Style Modal)
+   ============================================ */
+
+/* --- Overlay --- */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: popupFadeIn 0.3s ease;
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Content Card --- */
+.popup-content {
+  background: var(--color-card-bg);
+  max-width: 420px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 48px 40px 40px;
+  text-align: center;
+  position: relative;
+  animation: popupSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes popupSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- Close Button --- */
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-background-secondary, #F5F5F7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--color-text-secondary, #6E6E73);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.popup-close:hover {
+  background: var(--color-border, #D2D2D7);
+  color: var(--color-text-primary, #1D1D1F);
+}
+
+/* --- Body --- */
+.popup-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Title --- */
+.popup-title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #1D1D1F);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+/* --- Text --- */
+.popup-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary, #6E6E73);
+  line-height: 1.5;
+  margin-bottom: 32px;
+  max-width: 300px;
+}
+
+/* --- Code Box --- */
+.popup-code-box {
+  background: var(--color-background-secondary, #F5F5F7);
+  border: 1px solid var(--color-border, #D2D2D7);
+  border-radius: 16px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.popup-code-box:hover {
+  background: var(--color-border);
+}
+
+.popup-code {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #1D1D1F);
+  letter-spacing: 3px;
+  display: block;
+}
+
+.popup-code-hint {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #6E6E73);
+  display: block;
+  margin-top: 6px;
+}
+
+/* --- CTA Button --- */
+.popup-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  background: var(--color-primary, #0071E3);
+  color: #FFFFFF;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.popup-cta:hover {
+  background: #0077ED;
+}
+
+/* --- Skip Button --- */
+.popup-skip {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary, #6E6E73);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: color 0.2s ease;
+  width: 100%;
+}
+
+.popup-skip:hover {
+  color: var(--color-text-primary, #1D1D1F);
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .popup-content {
+    padding: 40px 24px 32px;
+    border-radius: 18px;
+  }
+
+  .popup-title {
+    font-size: 1.4rem;
+  }
+
+  .popup-text {
+    font-size: 0.9rem;
+  }
+
+  .popup-code {
+    font-size: 1.2rem;
+  }
+}

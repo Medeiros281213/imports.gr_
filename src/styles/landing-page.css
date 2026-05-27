@@ -1,0 +1,327 @@
+/* src/styles/landing-page.css */
+
+/* Core Landing Page Styles */
+.lp-hero-container {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+  color: white;
+  padding: 6rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.lp-hero-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lp-headline {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #fff, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1.5px;
+}
+
+.lp-subheadline {
+  font-size: 1.25rem;
+  color: #a1a1aa;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+/* Animations */
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.cta-button {
+  background-color: #25D366;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1.25rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  animation: pulse-green 2s infinite;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  background-color: #1ebe57;
+  box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4);
+}
+
+/* Trust Badges under Hero CTA */
+.trust-badges {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #8b949e;
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+.lp-hero-visual {
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.lp-collage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.lp-collage img {
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease;
+}
+
+.lp-collage img:hover {
+  transform: translateY(-10px);
+}
+
+.img-main {
+  width: 300px;
+  height: auto;
+  z-index: 3;
+}
+
+.img-side {
+  width: 220px;
+  height: auto;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+/* Scarcity Offers */
+.scarcity-section {
+  padding: 5rem 2rem;
+  background-color: var(--color-background-secondary);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: var(--color-text-primary);
+  letter-spacing: -1px;
+}
+
+.scarcity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.scarcity-card {
+  background: var(--color-card-bg);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.scarcity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.urgency-badge {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  align-self: center;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.scarcity-img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+}
+
+.scarcity-info h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.price-block {
+  margin-bottom: 1.5rem;
+}
+
+.price-old {
+  text-decoration: line-through;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.price-new {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+.scarcity-card .cta-button {
+  font-size: 1rem;
+  padding: 1rem;
+  width: 100%;
+  animation: none;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+  margin-bottom: 0;
+  margin-top: auto;
+}
+
+/* Objections */
+.objections-section {
+  padding: 5rem 2rem;
+  background-color: var(--color-background);
+}
+
+.objections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.guarantee-box {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: var(--color-text-primary);
+}
+
+.guarantee-box:hover {
+  border-color: var(--color-text-secondary);
+  background: var(--color-background-secondary);
+  transform: translateY(-3px);
+}
+
+.guarantee-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.guarantee-box h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.guarantee-box p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Final CTA Section */
+.final-cta-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  color: white;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.final-cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.final-cta-content h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.final-cta-content p {
+  font-size: 1.25rem;
+  color: #9ca3af;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .lp-headline {
+    font-size: 2.5rem;
+  }
+  
+  .lp-collage {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .img-side {
+    display: none; /* Hide side images on mobile for cleaner look */
+  }
+  
+  .trust-badges {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .final-cta-content h2 {
+    font-size: 2.25rem;
+  }
+}
