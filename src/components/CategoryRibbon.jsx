@@ -1,61 +1,43 @@
 import React from 'react';
 import '../styles/apple-store.css';
+import '../styles/categories.css';
 
 export default function CategoryRibbon({ categorias, ativa, setAtiva }) {
   const cats = categorias || [];
 
+  const getInitial = (category) => {
+    if (category === 'todos') return '∞';
+    return category.charAt(0).toUpperCase();
+  };
+
   return (
-    <div className="as-carousel" style={{ gap: '30px', paddingBottom: '20px' }}>
-      <div 
-        className="as-card-snap" 
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', gap: '8px' }}
+    <div className="as-carousel category-ribbon">
+      <button
+        className={`category-orb ${ativa === 'todos' ? 'active' : ''}`}
+        type="button"
         onClick={() => setAtiva('todos')}
+        aria-pressed={ativa === 'todos'}
       >
-        <div style={{ 
-          width: '74px', 
-          height: '74px', 
-          borderRadius: '50%', 
-          background: ativa === 'todos' ? '#000' : '#f5f5f7',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: ativa === 'todos' ? '#fff' : '#1d1d1f',
-          fontSize: '24px'
-        }}>
-          ∞
-        </div>
-        <span style={{ fontSize: '14px', fontWeight: ativa === 'todos' ? '600' : '400', color: '#1d1d1f' }}>Todos</span>
-      </div>
+        <div className="category-orb-icon">{getInitial('todos')}</div>
+        <span>Todos</span>
+      </button>
 
       {cats.map((cat, i) => {
         if (cat.toLowerCase() === 'todos') return null;
         const isAtiva = ativa === cat;
+
         return (
-          <div 
-            key={i} 
-            className="as-card-snap" 
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', gap: '8px' }}
+          <button
+            key={i}
+            className={`category-orb ${isAtiva ? 'active' : ''}`}
+            type="button"
             onClick={() => setAtiva(cat)}
+            aria-pressed={isAtiva}
           >
-            <div style={{ 
-              width: '74px', 
-              height: '74px', 
-              borderRadius: '50%', 
-              background: isAtiva ? '#000' : '#f5f5f7',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: isAtiva ? '#fff' : '#1d1d1f',
-              fontSize: '20px',
-              fontWeight: 'bold'
-            }}>
-              {cat.charAt(0).toUpperCase()}
-            </div>
-            <span style={{ fontSize: '14px', fontWeight: isAtiva ? '600' : '400', color: '#1d1d1f' }}>
-              {cat}
-            </span>
-          </div>
-        )
+            <div className="category-orb-icon">{getInitial(cat)}</div>
+            <span>{cat}</span>
+          </button>
+        );
       })}
     </div>
   );

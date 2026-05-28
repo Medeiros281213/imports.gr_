@@ -94,39 +94,73 @@
 .lp-hero-visual {
   margin-top: 4rem;
   width: 100%;
-  max-width: 900px;
+  max-width: 980px;
   position: relative;
   z-index: 1;
 }
 
-.lp-collage {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 20px;
+.lp-product-showcase {
+  position: relative;
+  width: min(100%, 920px);
+  height: 330px;
+  margin: 0 auto;
+  overflow: visible;
 }
 
-.lp-collage img {
-  border-radius: 20px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s ease;
-}
-
-.lp-collage img:hover {
-  transform: translateY(-10px);
-}
-
-.img-main {
+.lp-product-slide {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
   width: 300px;
-  height: auto;
+  height: 300px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition:
+    transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.85s ease,
+    filter 0.85s ease;
+  will-change: transform, opacity;
+}
+
+.lp-product-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lp-product-slide.center {
+  opacity: 1;
+  filter: saturate(1.05) brightness(1);
+  transform: translateX(-50%) translateY(0) scale(1);
   z-index: 3;
 }
 
-.img-side {
-  width: 220px;
-  height: auto;
-  opacity: 0.8;
-  margin-bottom: 20px;
+.lp-product-slide.left {
+  opacity: 0.72;
+  filter: saturate(0.85) brightness(0.78);
+  transform: translateX(calc(-50% - 300px)) translateY(18px) scale(0.73);
+  z-index: 2;
+}
+
+.lp-product-slide.right {
+  opacity: 0.72;
+  filter: saturate(0.85) brightness(0.78);
+  transform: translateX(calc(-50% + 300px)) translateY(18px) scale(0.73);
+  z-index: 2;
+}
+
+.lp-product-slide.hidden {
+  opacity: 0;
+  pointer-events: none;
+  filter: saturate(0.7) brightness(0.65);
+  transform: translateX(calc(-50% + 520px)) translateY(34px) scale(0.62);
+  z-index: 1;
 }
 
 /* Scarcity Offers */
@@ -307,13 +341,25 @@
     font-size: 2.5rem;
   }
   
-  .lp-collage {
-    flex-direction: column;
-    align-items: center;
+  .lp-hero-visual {
+    margin-top: 3rem;
   }
-  
-  .img-side {
-    display: none; /* Hide side images on mobile for cleaner look */
+
+  .lp-product-showcase {
+    height: 270px;
+  }
+
+  .lp-product-slide {
+    width: 250px;
+    height: 250px;
+  }
+
+  .lp-product-slide.left {
+    transform: translateX(calc(-50% - 170px)) translateY(20px) scale(0.62);
+  }
+
+  .lp-product-slide.right {
+    transform: translateX(calc(-50% + 170px)) translateY(20px) scale(0.62);
   }
   
   .trust-badges {
