@@ -4,14 +4,14 @@ import ModeToggle from "./ModeToggle";
 import "../styles/navbar.css";
 
 const menuItems = [
-  { label: "Inicio", target: "hero" },
-  { label: "Catalogo", target: "catalogo" },
-  { label: "Promocoes", target: "promocoes" },
-  { label: "Avaliacoes", target: "depoimentos" },
-  { label: "Contato", target: "contato" },
+  { label: "Inicio", path: "/", target: "hero" },
+  { label: "Catalogo", path: "/catalogo" },
+  { label: "Promocoes", path: "/catalogo", target: "promocoes" },
+  { label: "Avaliacoes", path: "/", target: "depoimentos" },
+  { label: "Contato", path: "/", target: "contato" },
 ];
 
-function Navbar({ onSearch }) {
+function Navbar({ onSearch, navigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,10 +46,15 @@ function Navbar({ onSearch }) {
     if (onSearch) onSearch(term);
   };
 
-  const scrollToSection = (id) => {
+  const handleMenuNavigation = (item) => {
     setMenuOpen(false);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+
+    if (navigate) {
+      navigate(item.path, item.target);
+      return;
+    }
+
+    window.location.href = item.target ? `${item.path}#${item.target}` : item.path;
   };
 
   return (
@@ -67,7 +72,17 @@ function Navbar({ onSearch }) {
             <span>Menu</span>
           </button>
 
-          <a href="#hero" className="apple-nav-logo" id="navbar-logo" aria-label="Imports GR">
+          <a
+            href="/"
+            className="apple-nav-logo"
+            id="navbar-logo"
+            aria-label="Imports GR"
+            onClick={(event) => {
+              if (!navigate) return;
+              event.preventDefault();
+              navigate("/", "hero");
+            }}
+          >
             <img src="/logo.png" alt="Imports GR" />
           </a>
 
@@ -105,7 +120,7 @@ function Navbar({ onSearch }) {
 
         <nav className="apple-side-links" aria-label="Menu principal">
           {menuItems.map((item) => (
-            <button type="button" key={item.target} onClick={() => scrollToSection(item.target)}>
+            <button type="button" key={`${item.path}-${item.target || item.label}`} onClick={() => handleMenuNavigation(item)}>
               <span>{item.label}</span>
               <FiChevronRight />
             </button>

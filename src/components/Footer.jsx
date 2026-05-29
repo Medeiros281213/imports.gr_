@@ -1,28 +1,34 @@
-import { FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
 import "../styles/footer.css";
 
-function Footer() {
+function Footer({ navigate }) {
+  const handleNavigate = (event, path, hash) => {
+    if (!navigate) return;
+
+    event.preventDefault();
+    navigate(path, hash);
+  };
+
   return (
     <footer className="footer" id="contato">
       <div className="footer-top">
         <div className="footer-container">
           <div className="footer-column">
-            <h4 className="footer-column-title">Navegação</h4>
+            <h4 className="footer-column-title">Navegacao</h4>
             <ul className="footer-links">
-              <li><a href="#hero">Home</a></li>
-              <li><a href="#catalogo">Catálogo</a></li>
-              <li><a href="#promocoes">Promoções</a></li>
-              <li><a href="#depoimentos">Depoimentos</a></li>
+              <li><a href="/" onClick={(event) => handleNavigate(event, "/", "hero")}>Home</a></li>
+              <li><a href="/catalogo" onClick={(event) => handleNavigate(event, "/catalogo")}>Catalogo</a></li>
+              <li><a href="/catalogo#promocoes" onClick={(event) => handleNavigate(event, "/catalogo", "promocoes")}>Promocoes</a></li>
+              <li><a href="/#depoimentos" onClick={(event) => handleNavigate(event, "/", "depoimentos")}>Depoimentos</a></li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h4 className="footer-column-title">Categorias</h4>
             <ul className="footer-links">
-              <li><a href="#catalogo">Perfumes</a></li>
-              <li><a href="#catalogo">Body Splash</a></li>
-              <li><a href="#catalogo">Eletrônicos</a></li>
-              <li><a href="#catalogo">Cremes</a></li>
+              <li><a href="/catalogo" onClick={(event) => handleNavigate(event, "/catalogo")}>Perfumes</a></li>
+              <li><a href="/catalogo" onClick={(event) => handleNavigate(event, "/catalogo")}>Body Splash</a></li>
+              <li><a href="/catalogo" onClick={(event) => handleNavigate(event, "/catalogo")}>Eletronicos</a></li>
+              <li><a href="/catalogo" onClick={(event) => handleNavigate(event, "/catalogo")}>Cremes</a></li>
             </ul>
           </div>
 
@@ -40,7 +46,7 @@ function Footer() {
             <ul className="footer-links">
               <li>
                 <a
-                  href="https://wa.me/5541997246465?text=Olá! Vim pelo site e gostaria de mais informações."
+                  href="https://wa.me/5541997246465?text=Ola! Vim pelo site e gostaria de mais informacoes."
                   target="_blank"
                   rel="noopener noreferrer"
                   id="footer-whatsapp"
@@ -59,10 +65,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  id="footer-tiktok"
-                >
+                <a href="#" id="footer-tiktok">
                   TikTok
                 </a>
               </li>
@@ -81,9 +84,9 @@ function Footer() {
 
       <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p>Copyright © {new Date().getFullYear()} IMPORTS GR. Todos os direitos reservados.</p>
+          <p>Copyright {new Date().getFullYear()} IMPORTS GR. Todos os direitos reservados.</p>
           <div className="footer-bottom-links">
-            <a href="#">Política de Privacidade</a>
+            <a href="#">Politica de Privacidade</a>
             <span className="footer-bottom-sep">|</span>
             <a href="#">Termos de Uso</a>
           </div>

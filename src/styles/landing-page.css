@@ -155,12 +155,21 @@
   z-index: 2;
 }
 
-.lp-product-slide.hidden {
+.lp-product-slide.hidden-left,
+.lp-product-slide.hidden-right {
   opacity: 0;
   pointer-events: none;
   filter: saturate(0.7) brightness(0.65);
-  transform: translateX(calc(-50% + 520px)) translateY(34px) scale(0.62);
+  visibility: hidden;
   z-index: 1;
+}
+
+.lp-product-slide.hidden-left {
+  transform: translateX(calc(-50% - 520px)) translateY(34px) scale(0.62);
+}
+
+.lp-product-slide.hidden-right {
+  transform: translateX(calc(-50% + 520px)) translateY(34px) scale(0.62);
 }
 
 /* Scarcity Offers */

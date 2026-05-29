@@ -1,46 +1,28 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import CardProduto from './CardProduto';
+import { groupProductVariations } from '../utils/product-grouping';
 import '../styles/apple-store.css';
 
 export default function ProductShelf({ title, subtitle, produtos }) {
   const carouselRef = useRef(null);
   const animationRef = useRef(null);
+  const interactionTimeoutRef = useRef(null);
   const isHovered = useRef(false);
-  const shouldLoop = produtos.length > 1;
-
-  const carouselItems = useMemo(() => {
-    if (!shouldLoop) return produtos;
-    return [...produtos, ...produtos, ...produtos];
-  }, [produtos, shouldLoop]);
+  const carouselItems = useMemo(() => groupProductVariations(produtos), [produtos]);
 
   useEffect(() => {
     const carousel = carouselRef.current;
-    if (!carousel || !shouldLoop) return;
-
-    const getCopyWidth = () => carousel.scrollWidth / 3;
-
-    const centerCarousel = () => {
-      carousel.scrollLeft = getCopyWidth();
-    };
-
-    const normalizeScroll = () => {
-      const copyWidth = getCopyWidth();
-
-      if (carousel.scrollLeft >= copyWidth * 2) {
-        carousel.scrollLeft -= copyWidth;
-      }
-
-      if (carousel.scrollLeft <= 0) {
-        carousel.scrollLeft += copyWidth;
-      }
-    };
-
-    centerCarousel();
+    if (!carousel || carouselItems.length < 2) return;
 
     const animate = () => {
       if (!isHovered.current) {
-        normalizeScroll();
-        carousel.scrollLeft += 0.45;
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+
+        if (carousel.scrollLeft >= maxScrollLeft - 1) {
+          carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          carousel.scrollLeft += 0.45;
+        }
       }
 
       animationRef.current = requestAnimationFrame(animate);
@@ -48,63 +30,82 @@ export default function ProductShelf({ title, subtitle, produtos }) {
 
     animationRef.current = requestAnimationFrame(animate);
 
-    const handleResize = () => centerCarousel();
-    window.addEventListener('resize', handleResize);
-
     return () => {
-      window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationRef.current);
+      window.clearTimeout(interactionTimeoutRef.current);
     };
-  }, [shouldLoop, produtos]);
+  }, [carouselItems.length]);
+
+  const pauseAutoScroll = (duration = 900) => {
+    isHovered.current = true;
+    window.clearTimeout(interactionTimeoutRef.current);
+    interactionTimeoutRef.current = window.setTimeout(() => {
+      isHovered.current = false;
+    }, duration);
+  };
+
+  const getScrollStep = () => {
+    const carousel = carouselRef.current;
+    const firstCard = carousel?.querySelector('.as-card-snap');
+
+    if (!carousel || !firstCard) return 320;
+
+    const carouselStyles = window.getComputedStyle(carousel);
+    const gap = parseFloat(carouselStyles.columnGap || carouselStyles.gap) || 20;
+
+    return firstCard.getBoundingClientRect().width + gap;
+  };
 
   const normalizeAfterButtonScroll = () => {
     window.setTimeout(() => {
       const carousel = carouselRef.current;
-      if (!carousel || !shouldLoop) return;
+      if (!carousel) return;
 
-      const copyWidth = carousel.scrollWidth / 3;
+      const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
 
-      if (carousel.scrollLeft >= copyWidth * 2) {
-        carousel.scrollLeft -= copyWidth;
+      if (carousel.scrollLeft > maxScrollLeft) {
+        carousel.scrollLeft = maxScrollLeft;
       }
 
-      if (carousel.scrollLeft <= 0) {
-        carousel.scrollLeft += copyWidth;
+      if (carousel.scrollLeft < 0) {
+        carousel.scrollLeft = 0;
       }
     }, 420);
   };
 
   const scrollLeftAction = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+      pauseAutoScroll();
+      carouselRef.current.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
       normalizeAfterButtonScroll();
     }
   };
 
   const scrollRightAction = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+      pauseAutoScroll();
+      carouselRef.current.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
       normalizeAfterButtonScroll();
     }
   };
 
   return (
-    <section className="as-section" style={{ position: 'relative' }}>
-      <div className="as-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <section className="as-section">
+      <div className="as-header as-shelf-header">
         <h2>{title} <span style={{ color: 'var(--color-text-secondary)' }}>{subtitle}</span></h2>
 
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div className="as-shelf-controls">
           <button
+            className="as-shelf-arrow"
             onClick={scrollLeftAction}
             aria-label="Produtos anteriores"
-            style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--color-card-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             &larr;
           </button>
           <button
+            className="as-shelf-arrow"
             onClick={scrollRightAction}
             aria-label="Proximos produtos"
-            style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--color-card-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             &rarr;
           </button>
@@ -120,11 +121,11 @@ export default function ProductShelf({ title, subtitle, produtos }) {
         onTouchEnd={() => isHovered.current = false}
       >
         {carouselItems.map((p, i) => (
-          <div className="as-card-snap" style={{ width: '313px' }} key={`${p.id}-${i}`}>
-            <CardProduto produto={p} index={i % Math.max(produtos.length, 1)} />
+          <div className="as-card-snap" key={`${p.id}-${i}`}>
+            <CardProduto produto={p} index={i} />
           </div>
         ))}
-        {produtos.length === 0 && (
+        {carouselItems.length === 0 && (
           <div style={{ padding: '20px', color: 'var(--color-text-secondary)' }}>
             Nenhum produto encontrado nesta categoria.
           </div>

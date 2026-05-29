@@ -5,11 +5,15 @@ import "../styles/card.css";
 
 function CardProduto({ produto, index }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVariationId, setSelectedVariationId] = useState(produto.variacoes?.[0]?.id || produto.id);
   const whatsappNumber = "5541997246465";
   const instagramUser = "imports.gr_";
+  const variacoes = produto.variacoes || [produto];
+  const selectedProduct = variacoes.find((variacao) => variacao.id === selectedVariationId) || variacoes[0];
+  const hasVariations = variacoes.length > 1;
 
   const whatsappMessage = encodeURIComponent(
-    `Olá! Tenho interesse no produto: *${produto.nome}* (${produto.marca}) - ${produto.preco}. Vi no site da IMPORTS GR!`
+    `Ola! Tenho interesse no produto: *${selectedProduct.nome}* (${selectedProduct.marca}) - ${selectedProduct.preco}. Vi no site da IMPORTS GR!`
   );
 
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
@@ -20,12 +24,15 @@ function CardProduto({ produto, index }) {
     const map = {
       "Mais Vendido": "badge-destaque",
       "Novo": "badge-novo",
-      "Frete Grátis": "badge-frete",
-      "Promoção": "badge-promo",
+      "Frete Gratis": "badge-frete",
+      "Frete GrÃ¡tis": "badge-frete",
+      "Promocao": "badge-promo",
+      "PromoÃ§Ã£o": "badge-promo",
       "Kit Exclusivo": "badge-destaque",
       "Destaque": "badge-destaque",
       "Importado": "badge-novo",
-      "Lançamento": "badge-novo",
+      "Lancamento": "badge-novo",
+      "LanÃ§amento": "badge-novo",
       "Gamer": "badge-destaque",
     };
     return map[badge] || "badge-novo";
@@ -37,7 +44,7 @@ function CardProduto({ produto, index }) {
     return parseFloat(cleanStr);
   };
 
-  const precoNum = parsePreco(produto.preco);
+  const precoNum = parsePreco(selectedProduct.preco);
   const parcela = precoNum > 0 ? (precoNum / 12).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
 
   return (
@@ -48,24 +55,39 @@ function CardProduto({ produto, index }) {
         onClick={() => setIsModalOpen(true)}
       >
         <div className="apple-card-image">
-          <img src={produto.imagem} alt={produto.nome} loading="lazy" />
-          {produto.badge && (
-            <span className={`apple-card-badge ${getBadgeClass(produto.badge)}`}>
-              {produto.badge}
+          <img src={selectedProduct.imagem} alt={selectedProduct.nome} loading="lazy" />
+          {selectedProduct.badge && (
+            <span className={`apple-card-badge ${getBadgeClass(selectedProduct.badge)}`}>
+              {selectedProduct.badge}
             </span>
           )}
         </div>
 
         <div className="apple-card-info">
-          <span className="apple-card-category">{produto.categoria}</span>
+          <span className="apple-card-category">{selectedProduct.categoria}</span>
           <h3 className="apple-card-name">{produto.nome}</h3>
-          <p className="apple-card-brand">{produto.marca}</p>
+          <p className="apple-card-brand">{selectedProduct.marca}</p>
+
+          {hasVariations && (
+            <div className="apple-card-variations" onClick={(e) => e.stopPropagation()}>
+              {variacoes.map((variacao) => (
+                <button
+                  type="button"
+                  className={`apple-card-variation ${selectedProduct.id === variacao.id ? "active" : ""}`}
+                  key={variacao.id}
+                  onClick={() => setSelectedVariationId(variacao.id)}
+                >
+                  {variacao.variationLabel || variacao.nome}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="apple-card-pricing">
-            {produto.precoAntigo && (
-              <span className="apple-card-price-old">{produto.precoAntigo}</span>
+            {selectedProduct.precoAntigo && (
+              <span className="apple-card-price-old">{selectedProduct.precoAntigo}</span>
             )}
-            <span className="apple-card-price">{produto.preco}</span>
+            <span className="apple-card-price">{selectedProduct.preco}</span>
           </div>
 
           {precoNum > 0 && (
@@ -75,10 +97,10 @@ function CardProduto({ produto, index }) {
           )}
 
           <div className="apple-card-stock">
-            {produto.estoque > 0 ? (
+            {selectedProduct.estoque > 0 ? (
               <>
                 <span className="stock-dot"></span>
-                {produto.estoque} em estoque
+                {selectedProduct.estoque} em estoque
               </>
             ) : (
               <span className="out-of-stock">Esgotado</span>
@@ -91,7 +113,7 @@ function CardProduto({ produto, index }) {
               target="_blank"
               rel="noopener noreferrer"
               className="apple-card-btn-whatsapp"
-              id={`whatsapp-${produto.id}`}
+              id={`whatsapp-${selectedProduct.id}`}
             >
               <FaWhatsapp /> WhatsApp
             </a>
@@ -100,7 +122,7 @@ function CardProduto({ produto, index }) {
               target="_blank"
               rel="noopener noreferrer"
               className="apple-card-btn-instagram"
-              id={`instagram-${produto.id}`}
+              id={`instagram-${selectedProduct.id}`}
             >
               <FaInstagram /> Instagram
             </a>
@@ -110,7 +132,7 @@ function CardProduto({ produto, index }) {
 
       {isModalOpen && (
         <ProductModal
-          produto={produto}
+          produto={selectedProduct}
           onClose={() => setIsModalOpen(false)}
         />
       )}

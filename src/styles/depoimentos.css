@@ -45,16 +45,32 @@
 /* --- Card --- */
 .depoimento-card {
   background: var(--color-card-bg, #F5F5F7);
+  border: 1px solid transparent;
   border-radius: 18px;
   padding: 32px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .depoimento-card:hover {
   transform: translateY(-4px);
+}
+
+.light .depoimento-card {
+  background: #F5F5F7;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+.light .depoimento-card:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.1);
+}
+
+.dark .depoimento-card {
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 /* --- Stars --- */

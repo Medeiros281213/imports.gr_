@@ -262,6 +262,15 @@ html {
   margin: 12px auto 0 auto;
 }
 
+.catalog-page-hero {
+  padding: 140px 24px 28px;
+  text-align: center;
+}
+
+.catalog-page-hero .section-subtitle {
+  margin-bottom: 0;
+}
+
 /* --- Gradient Text Utility --- */
 .gradient-text {
   background: var(--color-primary-gradient);

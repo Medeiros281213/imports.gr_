@@ -1,12 +1,20 @@
 .as-section {
   padding: 40px 0;
   overflow: hidden;
+  position: relative;
 }
 
 .as-header {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.as-shelf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
 }
 
 .as-header h2 {
@@ -21,6 +29,44 @@
   gap: 8px;
 }
 
+.as-shelf-controls {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-bottom: 24px;
+}
+
+.as-shelf-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  line-height: 1;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.as-shelf-arrow:hover {
+  background: var(--color-background-secondary);
+  border-color: var(--color-text-secondary);
+  transform: translateY(-1px);
+}
+
+.as-shelf-arrow:active {
+  transform: scale(0.96);
+}
+
+.as-shelf-arrow:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.28);
+  outline-offset: 3px;
+}
+
 .as-carousel {
   display: flex;
   overflow-x: auto;
@@ -29,6 +75,9 @@
   padding: 10px 24px 40px;
   margin: 0 auto;
   max-width: 1248px;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 
@@ -37,5 +86,80 @@
 }
 
 .as-card-snap {
+  width: clamp(248px, 72vw, 313px);
   flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.as-product-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 24px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .as-section {
+    padding: 32px 0;
+  }
+
+  .as-header {
+    padding: 0 20px;
+  }
+
+  .as-shelf-header {
+    align-items: flex-start;
+  }
+
+  .as-header h2 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .as-shelf-controls {
+    gap: 6px;
+  }
+
+  .as-shelf-arrow {
+    width: 42px;
+    height: 42px;
+  }
+
+  .as-carousel {
+    gap: 14px;
+    padding: 8px 20px 34px;
+  }
+
+  .as-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding: 8px 20px 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .as-shelf-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .as-header h2,
+  .as-shelf-controls {
+    margin-bottom: 0;
+  }
+
+  .as-shelf-controls {
+    align-self: flex-end;
+  }
+
+  .as-carousel {
+    padding-inline: 16px;
+  }
+
+  .as-product-grid {
+    grid-template-columns: 1fr;
+    padding-inline: 16px;
+  }
 }
