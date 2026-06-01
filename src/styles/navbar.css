@@ -259,6 +259,52 @@
   gap: 8px;
 }
 
+.apple-nav-account {
+  position: relative;
+}
+
+.apple-nav-account-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: rgba(18, 18, 20, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 8px 0;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.22);
+  z-index: 1002;
+}
+
+.apple-nav-account-menu-item {
+  width: 100%;
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #F5F5F7;
+  text-align: left;
+  padding: 0.95rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.apple-nav-account-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.light .apple-nav-account-menu {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.light .apple-nav-account-menu-item {
+  color: #111827;
+}
+
+
 .apple-side-links button {
   width: 100%;
   min-height: 52px;

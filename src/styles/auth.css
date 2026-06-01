@@ -1,0 +1,131 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: radial-gradient(circle at top, rgba(0, 157, 140, 0.08), transparent 40%), var(--color-background);
+}
+
+.auth-card {
+  width: min(480px, 100%);
+  background: var(--color-card-bg);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(16, 24, 40, 0.12);
+  padding: 2rem;
+  color: var(--color-text-primary);
+}
+
+.auth-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.auth-header p {
+  margin: 0.75rem 0 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tabs button {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.auth-tabs button.active {
+  background: #0f766e;
+  color: #ffffff;
+  border-color: #0f766e;
+}
+
+.auth-form label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.auth-form input {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+}
+
+.auth-form input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.13);
+}
+
+.auth-submit-button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 14px;
+  background: #0f766e;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.auth-message {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.auth-message.error {
+  background: rgba(254, 226, 226, 0.18);
+  color: #f87171;
+}
+
+.auth-message.success {
+  background: rgba(220, 252, 231, 0.18);
+  color: #34d399;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.auth-footer p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.auth-footer button,
+.auth-link {
+  background: none;
+  border: none;
+  color: #0f766e;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+}

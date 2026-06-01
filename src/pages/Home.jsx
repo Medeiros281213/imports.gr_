@@ -1,4 +1,3 @@
-import Topbar from "../components/Topbar";
 import Navbar from "../components/Navbar";
 import Depoimentos from "../components/Depoimentos";
 import FAQ from "../components/FAQ";
@@ -11,15 +10,14 @@ import LPHero from "../components/LPHero";
 import Objections from "../components/Objections";
 import ScarcityOffers from "../components/ScarcityOffers";
 
-function Home({ navigate }) {
+function Home({ navigate, currentUser, onLogout }) {
   const whatsappNumber = "5541997246465";
   const finalCtaMessage = encodeURIComponent("Ola! Quero aproveitar os estoques limitados e falar com um consultor agora.");
   const finalCtaLink = `https://wa.me/${whatsappNumber}?text=${finalCtaMessage}`;
 
   return (
     <div className="app-wrapper" style={{ backgroundColor: "var(--color-background)" }}>
-      <Topbar />
-      <Navbar navigate={navigate} />
+      <Navbar navigate={navigate} currentUser={currentUser} onLogout={onLogout} />
 
       <main>
         <LPHero />

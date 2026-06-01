@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Topbar from "../components/Topbar";
 import Navbar from "../components/Navbar";
 import CategoryRibbon from "../components/CategoryRibbon";
 import ProductShelf from "../components/ProductShelf";
@@ -15,7 +14,7 @@ const getCategoryLabel = (categoria) => {
   return categoria;
 };
 
-function Catalogo({ navigate }) {
+function Catalogo({ navigate, currentUser, onLogout }) {
   const [categoriaAtiva, setCategoriaAtiva] = useState(() => (
     window.location.hash === "#promocoes" ? "promocoes" : "todos"
   ));
@@ -127,8 +126,7 @@ function Catalogo({ navigate }) {
 
   return (
     <div className="app-wrapper" style={{ backgroundColor: "var(--color-background)" }}>
-      <Topbar />
-      <Navbar onSearch={setTermoBusca} navigate={navigate} />
+      <Navbar onSearch={setTermoBusca} navigate={navigate} currentUser={currentUser} onLogout={onLogout} />
 
       <main>
         <section className="catalog-page-hero" id="catalogo">

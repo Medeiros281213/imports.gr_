@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { FiChevronRight, FiMenu, FiSearch, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+import { FiChevronDown, FiChevronRight, FiMenu, FiSearch, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
 import ModeToggle from "./ModeToggle";
 import "../styles/navbar.css";
 
@@ -11,10 +11,12 @@ const menuItems = [
   { label: "Contato", path: "/", target: "contato" },
 ];
 
-function Navbar({ onSearch, navigate }) {
+function Navbar({ onSearch, navigate, currentUser, onLogout }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const accountRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +31,10 @@ function Navbar({ onSearch, navigate }) {
     document.body.classList.toggle("nav-menu-open", menuOpen);
 
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        setProfileOpen(false);
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -39,6 +44,17 @@ function Navbar({ onSearch, navigate }) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileOpen && accountRef.current && !accountRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => window.removeEventListener("mousedown", handleClickOutside);
+  }, [profileOpen]);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -86,10 +102,34 @@ function Navbar({ onSearch, navigate }) {
             <img src="/logo.png" alt="Imports GR" />
           </a>
 
-          <button className="apple-nav-login" type="button">
-            <FiUser />
-            <span>Login</span>
-          </button>
+          <div className="apple-nav-account" ref={accountRef}>
+            <button
+              className="apple-nav-login"
+              type="button"
+              onClick={() => {
+                if (!currentUser) {
+                  navigate?.("/login");
+                  return;
+                }
+                setProfileOpen((open) => !open);
+              }}
+            >
+              <FiUser />
+              <span>{currentUser ? currentUser.name || "Minha conta" : "Login"}</span>
+              {currentUser && <FiChevronDown />}
+            </button>
+
+            {currentUser && profileOpen && (
+              <div className="apple-nav-account-menu">
+                <button type="button" className="apple-nav-account-menu-item" onClick={() => { setProfileOpen(false); navigate?.("/profile"); }}>
+                  <span>Perfil</span>
+                </button>
+                <button type="button" className="apple-nav-account-menu-item" onClick={() => { setProfileOpen(false); onLogout?.(); navigate?.("/"); }}>
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
 
